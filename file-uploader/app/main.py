@@ -15,6 +15,6 @@ async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request, "name": NAME})
 
 @app.get("/api/health")
-def healt_check():
+def health_check():
     return "OK"
 

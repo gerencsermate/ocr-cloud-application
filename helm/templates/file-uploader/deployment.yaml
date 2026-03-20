@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-uploader
+spec:
+  selector:
+    matchLabels:
+      app: file-uploader
+  template:
+    metadata:
+      labels:
+        app: file-uploader
+    spec:
+      containers:
+        - name: file-uploader
+          image: gerencsermate/file-uploader:{{ .Values.file-uploader.version }}
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3

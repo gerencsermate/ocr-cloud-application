@@ -14,7 +14,7 @@ env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKERHUB_KEY: ${{ secrets.DOCKERHUB_KEY }}
   FILE_UPLOADER_IMAGE_NAME: file-uploader
-  PYTHON_VERSION: ${{ variables.PYTHON_VERSION }}
+  PYTHON_VERSION: ${{ vars.PYTHON_VERSION }}
 
 jobs:
   lint:

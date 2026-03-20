@@ -1,2 +1,2 @@
-file-uploader:
-  version: 630303c7a503b9b513d906262d4233a62829244c
+env:
+  FILE_UPLOADER_IMAGE_VERSION: 9ef1ff41efd4f9b8e157fe9c7274c3b32101fea0

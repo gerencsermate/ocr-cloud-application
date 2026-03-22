@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-sender
+spec:
+  selector:
+    matchLabels:
+      app: notification-sender
+  template:
+    metadata:
+      labels:
+        app: notification-sender
+    spec:
+      containers:
+        - name: notification-sender
+          image: gerencsermate/notification-sender:{{ .Values.env.FILE_UPLOADER_IMAGE_VERSION }}
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3

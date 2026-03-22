@@ -62,7 +62,7 @@ jobs:
       - name: Run tests
         working-directory: file-uploader
         run: |
-          pytest tests/ --maxfail=1 --disable-warnings -v
+          python -m pytest
 
   build-and-deploy:
     runs-on: ubuntu-latest

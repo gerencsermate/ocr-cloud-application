@@ -4,17 +4,20 @@ import os
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from pathlib import Path
 
 NAME = os.getenv("USERNAME", "")
 
+TEMPLATE_FOLDER = Path(__file__).parent / "templates"
+
 app = FastAPI()
 
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory=str(TEMPLATE_FOLDER))
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     """Serves the main HTML page."""
-    return templates.TemplateResponse("index.html", {"request": request, "name": NAME})
+    return templates.TemplateResponse(name="index.html", request=request, context={"name": NAME})
 
 @app.get("/api/health")
 def health_check():

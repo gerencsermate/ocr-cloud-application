@@ -10,4 +10,4 @@ def test_welcome():
 def test_health():
     response = client.get("/api/health")
     assert response.status_code == 200
-    assert response.text == "OK"
+    assert response.json() == "OK"

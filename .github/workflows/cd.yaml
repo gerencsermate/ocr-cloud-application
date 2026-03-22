@@ -34,9 +34,11 @@ jobs:
             file-uploader: 
               - 'file-uploader/**'
               - 'helm/**'
+              - '.github/**'
             notification-sender: 
               - 'notification-sender/**'
               - 'helm/**'
+              - '.github/**'
 
   lint:
     if: ${{ needs.changes.outputs.services != '[]' }}

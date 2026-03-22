@@ -1,10 +1,11 @@
 """File uploader service"""
 import os
 
+from pathlib import Path
+
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from pathlib import Path
 
 NAME = os.getenv("USERNAME", "")
 

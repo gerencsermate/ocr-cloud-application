@@ -16,12 +16,12 @@ spec:
           image: gerencsermate/notification-sender:{{ .Values.env.FILE_UPLOADER_IMAGE_VERSION }}
           ports:
             - name: http
-              containerPort: 8000
+              containerPort: 9000
               protocol: TCP
           readinessProbe:
             httpGet:
               path: /api/health
-              port: 8000
+              port: 9000
             initialDelaySeconds: 10
             periodSeconds: 10
             successThreshold: 1
@@ -29,7 +29,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /api/health
-              port: 8000
+              port: 9000
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5

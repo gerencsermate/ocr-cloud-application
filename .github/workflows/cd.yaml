@@ -33,11 +33,13 @@ jobs:
           filters: |
             file-uploader: 
               - 'file-uploader/**'
-              - 'helm/**'
+              - 'helm/templates/file-uploader/**'
+              - 'helm/*'
               - '.github/**'
             notification-sender: 
               - 'notification-sender/**'
-              - 'helm/**'
+              - 'helm/templates/notification-sender/**'
+              - 'helm/*'
               - '.github/**'
 
   lint:

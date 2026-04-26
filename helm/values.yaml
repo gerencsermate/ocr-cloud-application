@@ -11,3 +11,8 @@ fileUploader:
   logLevel: INFO
   jwtAlgorithm: HS256
   jwtSecret: TestJwtSecret
+
+ocrAnalyzer:
+  logLevel: INFO
+  gpuEnabled: false
+  ocrLanguages: "hu,en"

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ocr-analyzer-config
+data:
+  LOG_LEVEL: {{ .Values.ocrAnalyzer.logLevel }}
+  GPU_ENABLED: {{ .Values.ocrAnalyzer.gpuEnabled }}
+  OCR_LANGUAGES: {{ .Values.ocrAnalyzer.ocrLanguages }}
+  

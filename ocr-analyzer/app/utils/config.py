@@ -2,7 +2,6 @@ import os
 import logging
 from typing import List, Optional
 
-# Belső globális változó a példánynak
 _settings: Optional['Configuration'] = None
 logger = logging.getLogger(__name__)
 
@@ -24,7 +23,7 @@ class Configuration:
         valid_levels = ["INFO", "DEBUG"]
         if self.LOG_LEVEL not in valid_levels:
             raise ValueError(
-                f"Invalid log level: {self.LOG_LEVEL}. Available log levels: {valid_log_levels}"
+                f"Invalid log level: {self.LOG_LEVEL}. Available log levels: {valid_levels}"
             )
 
 def init_config() -> Configuration:

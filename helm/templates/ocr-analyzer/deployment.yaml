@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ocr-analyzer
+spec:
+  selector:
+    matchLabels:
+      app: ocr-analyzer
+  template:
+    metadata:
+      labels:
+        app: ocr-analyzer
+    spec:
+      containers:
+        - name: ocr-analyzer
+          image: gerencsermate/ocr-analyzer:{{ .Values.env.FILE_UPLOADER_IMAGE_VERSION }}
+          ports:
+            - name: http
+              containerPort: 9000
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 9000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 9000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          envFrom:
+            - configMapRef:
+                name: ocr-analyzer-config
+          volumeMounts:
+            - name: uploaded-files-volume
+              mountPath: /app/UPLOADED_FILES
+      volumes:
+        - name: uploaded-files-volume
+          persistentVolumeClaim:
+            claimName: file-uploader-pvc

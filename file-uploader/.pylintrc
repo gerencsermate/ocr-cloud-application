@@ -12,6 +12,7 @@ disable=
     W0603, ; Using the global statement (Config init miatt)
     R0913, ; Too many arguments
     R0917, ; Too many positional arguments
+    W0718,
 
 [FORMAT]
 max-line-length=120

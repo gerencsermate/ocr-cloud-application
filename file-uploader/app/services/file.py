@@ -60,11 +60,11 @@ class FileService:
                 timeout=30.0,
             )
 
-            if response.status_code == 200:
-                ocr_data = OCRResponse(**response.json())
-                logger.info("OCR process was successful: %s", ocr_data)
-                return ocr_data
-            else:
+            if response.status_code != 200:
                 raise ValueError(
                     f"OCR process failed: {response.status_code}, {response.text}"
                 )
+
+            ocr_data = OCRResponse(**response.json())
+            logger.info("OCR process was successful: %s", ocr_data)
+            return ocr_data

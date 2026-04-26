@@ -9,6 +9,7 @@ class Configuration:
         self.JWT_ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
         self.LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
         self.MONGODB_URL = os.getenv("MONGODB_URL")
+        self.DB_NAME = os.getenv("DB_NAME")
 
         self._validate()
 
@@ -30,6 +31,9 @@ class Configuration:
 
         if not self.MONGODB_URL:
             raise ValueError("'MONGODB_URL' is not set!")
+        
+        if not self.DB_NAME:
+            raise ValueError("'DB_NAME' is not set!")
 
 
 def init_config():

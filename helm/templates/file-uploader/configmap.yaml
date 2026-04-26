@@ -5,3 +5,4 @@ metadata:
 data:
   JWT_ALGORITHM: {{ .Values.fileUploader.jwtAlgorithm }}
   LOG_LEVEL: {{ .Values.fileUploader.logLevel }}
+  DB_NAME: {{ .Values.mongodb.dbName }}

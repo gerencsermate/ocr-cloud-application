@@ -14,7 +14,7 @@ class Database:
     async def initialize(self):
         conf = get_configuration()
         self.client = AsyncMongoClient(conf.MONGODB_URL)
-        await init_beanie(database=self.client.db_name, document_models=[User, File])
+        await init_beanie(database=self.client[conf.DB_NAME], document_models=[User, File])
         logger.info(
             "MongoDB connected, db host: %s, db name: %s",
             {self.client.HOST},

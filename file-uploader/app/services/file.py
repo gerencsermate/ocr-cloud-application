@@ -23,7 +23,7 @@ class FileService:
     async def list_files_for_user(self, user_id: str) -> List[File]:
         files = await self.repository.get_files_by_user(user_id=user_id)
         return files
-    
+
     async def upload_file(
         self, uploaded_filename: str, file: BinaryIO, uploader_id: str, description: str
     ) -> File:
@@ -49,17 +49,22 @@ class FileService:
         saved_file = await self.repository.save_file(file=file)
 
         return saved_file
-    
+
     async def _trigger_ocr_process(self, filename: str) -> OCRResponse:
         ocr_request = OCRRequest(file_name=filename)
-        
+
         async with httpx.AsyncClient() as client:
-            response = await client.post(f"{self.conf.OCR_URL}/ocr-process", json=ocr_request.model_dump_json(), timeout=30.0)
-            
+            response = await client.post(
+                f"{self.conf.OCR_URL}/ocr-process",
+                json=ocr_request.model_dump_json(),
+                timeout=30.0,
+            )
+
             if response.status_code == 200:
                 ocr_data = OCRResponse(**response.json())
                 logger.info("OCR process was successful: %s", ocr_data)
                 return ocr_data
             else:
-                raise ValueError(f"OCR process failed: {response.status_code}, {response.text}")
-                    
+                raise ValueError(
+                    f"OCR process failed: {response.status_code}, {response.text}"
+                )

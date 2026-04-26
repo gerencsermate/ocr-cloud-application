@@ -32,10 +32,10 @@ class Configuration:
 
         if not self.MONGODB_URL:
             raise ValueError("'MONGODB_URL' is not set!")
-        
+
         if not self.DB_NAME:
             raise ValueError("'DB_NAME' is not set!")
-        
+
         if not self.OCR_URL:
             raise ValueError("'OCR_URL' is not set!")
 

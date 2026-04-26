@@ -11,6 +11,7 @@ fileUploader:
   logLevel: INFO
   jwtAlgorithm: HS256
   jwtSecret: TestJwtSecret
+  ocrUrl: http://ocr-analyzer-service:27017
 
 ocrAnalyzer:
   logLevel: INFO

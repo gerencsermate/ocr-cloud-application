@@ -10,6 +10,7 @@ class Configuration:
         self.LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
         self.MONGODB_URL = os.getenv("MONGODB_URL")
         self.DB_NAME = os.getenv("DB_NAME")
+        self.OCR_URL = os.getenv("OCR_URL")
 
         self._validate()
 
@@ -34,6 +35,9 @@ class Configuration:
         
         if not self.DB_NAME:
             raise ValueError("'DB_NAME' is not set!")
+        
+        if not self.OCR_URL:
+            raise ValueError("'OCR_URL' is not set!")
 
 
 def init_config():

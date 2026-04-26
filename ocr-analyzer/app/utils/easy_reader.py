@@ -1,4 +1,3 @@
-import os
 import easyocr
 
 from app.utils.config import get_configuration
@@ -20,7 +19,7 @@ class OCRReaderSingleton:
             )
 
         except Exception as e:
-            logger.error(f"Failed to initilize EasyOCR {e}")
+            logger.error("Failed to initilize EasyOCR: %s", str(e))
             raise e
 
     def get_reader(self):

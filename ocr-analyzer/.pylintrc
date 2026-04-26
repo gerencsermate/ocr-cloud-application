@@ -10,6 +10,7 @@ disable=
     R0903, ; Too few public methods
     R0901, ; Too many ancestors (Beanie/Pydantic miatt kell)
     W0603, ; Using the global statement (Config init miatt)
+    W0707,
     R0913, ; Too many arguments
     R0917, ; Too many positional arguments
     R0914,

@@ -1,8 +1,6 @@
 from contextlib import asynccontextmanager
 import dotenv
-from fastapi import FastAPI, Request, Depends
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
+from fastapi import FastAPI
 
 
 from app.utils.config import init_config

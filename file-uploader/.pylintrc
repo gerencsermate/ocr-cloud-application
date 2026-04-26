@@ -1,0 +1,18 @@
+[MASTER]
+init-hook='import sys; sys.path.append(".")'
+
+[MESSAGES CONTROL]
+# C0114: Module docstring
+# C0115: Class docstring
+# C0116: Function docstring
+# C0103: Invalid name (pl. a JWT_SECRET nagybetűsítése miatt)
+# R0903: Too few public methods
+disable=
+    C0114,
+    C0115,
+    C0116,
+    C0103,
+    R0903,
+
+[FORMAT]
+max-line-length=120

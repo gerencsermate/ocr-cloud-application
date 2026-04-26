@@ -3,3 +3,4 @@ uvicorn
 jinja2
 motor
 beanie
+python-jose[cryptography]

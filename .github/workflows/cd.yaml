@@ -41,6 +41,11 @@ jobs:
               - 'helm/templates/notification-sender/**'
               - 'helm/*'
               - '.github/**'
+            ocr-analyzer: 
+              - 'ocr-analyzer/**'
+              - 'helm/templates/ocr-analyzer/**'
+              - 'helm/*'
+              - '.github/**'
 
   lint:
     if: ${{ needs.changes.outputs.services != '[]' }}

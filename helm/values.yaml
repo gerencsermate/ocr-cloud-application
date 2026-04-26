@@ -1,3 +1,13 @@
 env:
-  FILE_UPLOADER_IMAGE_VERSION: "f000c8c618efe4218de45863640d64e9ab1bd2e6"
-  NOTIFICATION_SENDER_IMAGE_VERSION: "f000c8c618efe4218de45863640d64e9ab1bd2e6"
+  FILE_UPLOADER_IMAGE_VERSION: "b13b09be21ab112c0fbb03aef9f2ab47f2fb39e5"
+  NOTIFICATION_SENDER_IMAGE_VERSION: "b13b09be21ab112c0fbb03aef9f2ab47f2fb39e5"
+
+mongodb:
+  username: admin
+  password: admin
+  dbName: ocr-db
+
+fileUploader:
+  logLevel: INFO
+  jwtAlgorithm: HS256
+  jwtSecret: TestJwtSecret

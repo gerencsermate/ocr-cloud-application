@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Regisztráció</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #eceff1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .reg-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .checkbox-group {
+            margin: 15px 0;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1e88e5;
+        }
+
+        .error {
+            color: #d32f2f;
+            background: #ffcdd2;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reg-box">
+        <h2>Új fiók létrehozása</h2>
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+        <form action="/register" method="post">
+            <input type="text" name="username" placeholder="Felhasználónév (min. 5)" required>
+            <input type="password" name="password" placeholder="Jelszó (min. 8)" required>
+            <input type="password" name="re_password" placeholder="Jelszó újra" required>
+
+            <div class="checkbox-group">
+                <input type="checkbox" name="as_admin" id="as_admin">
+                <label for="as_admin">Üzemeltetői jogosultság</label>
+            </div>
+
+            <button type="submit">Regisztráció</button>
+        </form>
+        <div style="text-align:center; margin-top:15px;">
+            <a href="/login" style="font-size: 0.9rem;">Vissza a belépéshez</a>
+        </div>
+    </div>
+</body>
+
+</html>

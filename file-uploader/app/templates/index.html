@@ -1,44 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to OCR App</title>
+    <title>OCR Cloud App - Kezdőlap</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f0f4f8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7f6;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
         }
 
-        .container {
+        .card {
             background: white;
-            padding: 40px 60px;
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
+            width: 400px;
         }
 
         h1 {
-            color: #1e3a8a;
-            margin-bottom: 20px;
+            color: #2c3e50;
         }
 
-        p {
-            font-size: 18px;
-            color: #374151;
+        .user-info {
+            margin: 1.5rem 0;
+            color: #7f8c8d;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 6px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .btn-outline {
+            border: 1px solid #3498db;
+            color: #3498db;
+        }
+
+        .btn-logout {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 15px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Welcome to the OCR App!</h1>
-        <p>Hello {{name}}!</p>
+    <div class="card">
+        <h1>OCR Cloud System</h1>
+        <div class="user-info">
+            <p>Üdvözöljük, <strong>{{ name }}</strong>!</p>
+        </div>
+
+        <div class="nav-links">
+            {% if user %}
+            <a href="/upload" class="btn btn-primary">Fájl feltöltése</a>
+            {% if user.role == 'admin' %}
+            <a href="/admin" class="btn btn-outline">Üzemeltetői panel</a>
+            {% endif %}
+            <a href="/logout" class="btn btn-logout">Kijelentkezés</a>
+            {% else %}
+            <a href="/login" class="btn btn-primary">Bejelentkezés</a>
+            <a href="/register" class="btn btn-outline">Regisztráció</a>
+            {% endif %}
+        </div>
     </div>
 </body>
 

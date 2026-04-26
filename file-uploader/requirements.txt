@@ -1,3 +1,5 @@
-fastapi
+fastapi[standard]
 uvicorn
 jinja2
+motor
+beanie

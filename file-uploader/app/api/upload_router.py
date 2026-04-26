@@ -33,7 +33,7 @@ async def login_page(
             request=request, name="upload.html", context={"files": files}
         )
 
-    except Exception as e:
+    except ValueError as e:
         return templates.TemplateResponse(
             request=request, name="upload.html", context={"error": str(e)}
         )

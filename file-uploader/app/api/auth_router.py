@@ -54,8 +54,8 @@ async def register_action(
 @router.post("/login")
 async def login_action(
     request: Request,
-    username: str = Form(...),
-    password: str = Form(...),
+    username: str = Form(),
+    password: str = Form(),
     auth_service: AuthService = Depends(AuthService),
 ):
     try:

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR - Fájlkezelés</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #eceff1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #444;
+            margin-top: 0;
+        }
+
+        .description-input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .file-input-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            display: inline-block;
+            padding: 12px;
+            cursor: pointer;
+            background: #fff;
+            border: 1px dashed #bbb;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+            color: #666;
+        }
+
+        .custom-file-upload:hover {
+            background: #f9f9f9;
+            border-color: #4caf50;
+        }
+
+        button.submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        button.submit-btn:hover {
+            background: #45a049;
+        }
+
+        .back-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #607d8b;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 20px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #546e7a;
+        }
+
+        .error {
+            color: #d32f2f;
+            background: #ffcdd2;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            border: 1px solid #ef9a9a;
+        }
+
+        .success {
+            color: #2e7d32;
+            background: #c8e6c9;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            border: 1px solid #a5d6a7;
+        }
+
+        .file-name-label {
+            color: #4caf50;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            display: block;
+            font-weight: bold;
+        }
+
+        .file-card {
+            display: flex;
+            gap: 20px;
+            background: #f8fafb;
+            border: 1px solid #e0e6ed;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+
+        .file-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .preview-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .file-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-error-msg {
+            display: none;
+            font-size: 0.7rem;
+            color: #999;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .file-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .file-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .file-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .label-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #999;
+            font-weight: bold;
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        .ocr-content {
+            background: #fff;
+            border-left: 3px solid #4caf50;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            color: #555;
+            font-style: italic;
+            max-height: 80px;
+            overflow-y: auto;
+        }
+
+        .no-ocr {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Új fájl feltöltése</h2>
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        {% if message %}
+        <div class="success">{{ message }}</div>
+        {% endif %}
+
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="text" name="description" class="description-input" placeholder="Fájl leírása (pl. Számla 2024)"
+                required>
+
+            <div class="file-input-container">
+                <label for="file-upload" class="custom-file-upload" id="label-text">
+                    📁 Kattints a fájl kiválasztásához
+                </label>
+                <input id="file-upload" type="file" name="file" accept=".png, .jpg, .jpeg" required
+                    onchange="updateLabel()">
+                <span id="file-name-display" class="file-name-label"></span>
+            </div>
+
+            <button type="submit" class="submit-btn">Feltöltés</button>
+        </form>
+    </div>
+
+    <div class="container" style="max-width: 800px;">
+        <h2>Feltöltött dokumentumok</h2>
+
+        <div id="file-list">
+            {% if files and files|length > 0 %}
+            {% for file in files %}
+            <div class="file-card">
+                <div class="preview-container">
+                    <img src="/download/{{ file.filename }}" class="file-preview" alt="Preview"
+                        onerror="handleImageError(this)">
+                    <div class="image-error-msg">❌ Kép nem betölthető</div>
+                </div>
+
+                <div class="file-details">
+                    <div class="file-header">
+                        <div>
+                            <span class="label-tag">Leírás</span>
+                            <p class="file-title">{{ file.description }}</p>
+                        </div>
+                        <small style="color: #bbb; font-size: 0.7rem;">{{ file.filename }}</small>
+                    </div>
+
+                    <div>
+                        <span class="label-tag">Felismerte szöveg (OCR)</span>
+                        {% if file.ocr_text %}
+                        <div class="ocr-content">{{ file.ocr_text }}</div>
+                        {% else %}
+                        <div class="no-ocr">A feldolgozás folyamatban vagy nem tartalmaz szöveget...</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div style="text-align: center; color: #999; padding: 40px;">
+                Még nincs feltöltött fájlod. Kezdj el feltölteni valamit fent!
+            </div>
+            {% endif %}
+        </div>
+
+        <a href="/" class="back-btn">Vissza a főoldalra</a>
+    </div>
+
+    <script>
+        function updateLabel() {
+            const input = document.getElementById('file-upload');
+            const display = document.getElementById('file-name-display');
+            const labelText = document.getElementById('label-text');
+            if (input.files.length > 0) {
+                display.textContent = "Kiválasztva: " + input.files[0].name;
+                labelText.textContent = "Fájl módosítása";
+            }
+        }
+
+        function handleImageError(img) {
+            img.style.display = 'none';
+            const container = img.parentElement;
+            const errorMsg = container.querySelector('.image-error-msg');
+            if (errorMsg) {
+                errorMsg.style.display = 'block';
+            }
+            container.style.background = '#fbe9e7';
+        }
+    </script>
+</body>
+
+</html>

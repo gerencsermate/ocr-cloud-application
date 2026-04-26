@@ -1,13 +1,16 @@
 from contextlib import asynccontextmanager
 import dotenv
 from fastapi import FastAPI, Request, Depends
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from app.api.auth_router import router as auth_router
+from app.api.upload_router import router as upload_router
 from app.utlis.config import init_config
 from app.utlis.logger import init_logger
 from app.utlis.database import Database
 from app.services.auth import AuthService
+from app.utlis.config import get_configuration
 
 
 @asynccontextmanager
@@ -29,6 +32,9 @@ app = FastAPI(lifespan=lifespan)
 
 templates = Jinja2Templates(directory="app/templates")
 app.include_router(auth_router)
+app.include_router(upload_router)
+
+app.mount("/download", StaticFiles(directory="UPLOADED_FILES"), name="download")
 
 
 @app.get("/")

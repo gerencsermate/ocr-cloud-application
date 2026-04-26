@@ -9,6 +9,7 @@ class Configuration:
         self.JWT_ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
         self.LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
         self.MONGODB_URL = os.getenv("MONGODB_URL")
+        self.UPLOAD_DIR = os.getenv("UPLOAD_DIR")
 
         self._validate()
 
@@ -30,6 +31,10 @@ class Configuration:
 
         if not self.MONGODB_URL:
             raise ValueError("'MONGODB_URL' is not set!")
+        
+        if self.UPLOAD_DIR is None or self.UPLOAD_DIR == "":
+            raise ValueError("'UPLOAD_DIR' is not set!")
+        os.makedirs(self.UPLOAD_DIR, exist_ok=True)
 
 
 def init_config():

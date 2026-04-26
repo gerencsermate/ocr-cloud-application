@@ -41,3 +41,8 @@ async def index(request: Request, auth_service: AuthService = Depends(AuthServic
     return templates.TemplateResponse(
         request=request, name="index.html", context={"user": user_data}
     )
+
+@app.get("/api/health")
+def health_check():
+    """Returns a 200 OK status for health checks."""
+    return "OK"

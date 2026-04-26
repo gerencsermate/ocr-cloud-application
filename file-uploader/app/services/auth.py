@@ -1,16 +1,17 @@
-from jose import JWTError, jwt
-from passlib.context import CryptContext
 from datetime import datetime, timedelta, timezone
+from typing import Annotated
 
 from pydantic import ValidationError
+from jose import JWTError, jwt
+from passlib.context import CryptContext
+from fastapi import Depends
+
 from app.utlis.config import get_configuration
 from app.repositories.user_repository import UserRepository
 from app.model.db.user import User
 from app.model.api.auth import TokenData, Role
 from app.utlis.logger import logger
 
-from typing import Annotated
-from fastapi import Depends
 
 
 class AuthService:
@@ -75,7 +76,7 @@ class AuthService:
             return TokenData(**payload)
 
         except (JWTError, ValidationError, IndexError) as e:
-            logger.error(f"Could not validate token: {e}")
+            logger.error("Could not validate token: %s", e)
             return None
 
     def _create_access_token(self, token_data: TokenData) -> str:

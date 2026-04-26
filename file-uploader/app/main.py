@@ -10,7 +10,6 @@ from app.utlis.config import init_config
 from app.utlis.logger import init_logger
 from app.utlis.database import Database
 from app.services.auth import AuthService
-from app.utlis.config import get_configuration
 
 
 @asynccontextmanager
@@ -47,6 +46,7 @@ async def index(request: Request, auth_service: AuthService = Depends(AuthServic
     return templates.TemplateResponse(
         request=request, name="index.html", context={"user": user_data}
     )
+
 
 @app.get("/api/health")
 def health_check():

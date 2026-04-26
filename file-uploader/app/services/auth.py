@@ -13,7 +13,6 @@ from app.model.api.auth import TokenData, Role
 from app.utlis.logger import logger
 
 
-
 class AuthService:
     def __init__(
         self, user_repository: Annotated[UserRepository, Depends(UserRepository)]

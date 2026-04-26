@@ -31,7 +31,7 @@ class Configuration:
 
         if not self.MONGODB_URL:
             raise ValueError("'MONGODB_URL' is not set!")
-        
+
         if self.UPLOAD_DIR is None or self.UPLOAD_DIR == "":
             raise ValueError("'UPLOAD_DIR' is not set!")
         os.makedirs(self.UPLOAD_DIR, exist_ok=True)

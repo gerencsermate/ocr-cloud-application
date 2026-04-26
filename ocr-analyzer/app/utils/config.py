@@ -2,13 +2,14 @@ import os
 import logging
 from typing import List, Optional
 
-_settings: Optional['Configuration'] = None
+_settings: Optional["Configuration"] = None
 logger = logging.getLogger(__name__)
+
 
 class Configuration:
     def __init__(self):
         self.LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
-        
+
         raw_langs = os.getenv("OCR_LANGUAGES", "hu,en")
         self.OCR_LANGUAGES: List[str] = [
             l.strip() for l in raw_langs.split(",") if l.strip()
@@ -26,11 +27,13 @@ class Configuration:
                 f"Invalid log level: {self.LOG_LEVEL}. Available log levels: {valid_levels}"
             )
 
+
 def init_config() -> Configuration:
     global _settings
     if _settings is None:
         _settings = Configuration()
     return _settings
+
 
 def get_configuration() -> Configuration:
     if _settings is None:

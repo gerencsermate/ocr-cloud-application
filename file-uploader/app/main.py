@@ -11,7 +11,7 @@ from app.services.auth import AuthService
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(_app: FastAPI):
     dotenv.load_dotenv()
 
     init_config()

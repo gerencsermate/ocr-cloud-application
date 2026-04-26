@@ -45,7 +45,7 @@ async def register_action(
         return res
 
     except ValueError as e:
-        logger.error(f"Registration failed: {e}")
+        logger.error("Registration failed: %s", e)
         return templates.TemplateResponse(
             request=request, name="register.html", context={"error": str(e)}
         )

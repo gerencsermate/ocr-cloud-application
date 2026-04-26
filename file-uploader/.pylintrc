@@ -2,17 +2,15 @@
 init-hook='import sys; sys.path.append(".")'
 
 [MESSAGES CONTROL]
-# C0114: Module docstring
-# C0115: Class docstring
-# C0116: Function docstring
-# C0103: Invalid name (pl. a JWT_SECRET nagybetűsítése miatt)
-# R0903: Too few public methods
 disable=
-    C0114,
-    C0115,
-    C0116,
-    C0103,
-    R0903,
+    C0114, ; Missing module docstring
+    C0115, ; Missing class docstring
+    C0116, ; Missing function docstring
+    R0903, ; Too few public methods
+    R0901, ; Too many ancestors (Beanie/Pydantic miatt kell)
+    W0603, ; Using the global statement (Config init miatt)
+    R0913, ; Too many arguments
+    R0917, ; Too many positional arguments
 
 [FORMAT]
 max-line-length=120

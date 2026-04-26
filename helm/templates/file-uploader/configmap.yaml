@@ -2,7 +2,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: backend-config
-spec:
-  data:
-    JWT_ALGORITHM: {{ .Values.fileUploader.jwtAlgorithm }}
-    LOG_LEVEL: {{ .Values.fileUploader.logLevel }}
+data:
+  JWT_ALGORITHM: {{ .Values.fileUploader.jwtAlgorithm }}
+  LOG_LEVEL: {{ .Values.fileUploader.logLevel }}

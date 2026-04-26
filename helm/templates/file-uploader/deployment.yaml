@@ -49,3 +49,10 @@ spec:
                 secretKeyRef:
                   name: backend-secrets
                   key: MONGODB_URL
+          volumeMounts:
+            - name: uploaded-files-volume
+              mountPath: /app/UPLOADED_FILES
+      volumes:
+        - name: uploaded-files-volume        # Ez egy tetszőleges név a Pod-on belül
+          persistentVolumeClaim:
+            claimName: file-uploader-pvc

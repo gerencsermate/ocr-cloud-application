@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: file-uploader-pvc
+spec:
+  accessModes:
+    - ReadWriteMany  # Így több pod is használhatja egyszerre
+  resources:
+    requests:
+      storage: 5Gi   # Méret igény szerint

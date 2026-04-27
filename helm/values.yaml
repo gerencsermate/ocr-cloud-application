@@ -12,9 +12,9 @@ fileUploader:
   logLevel: INFO
   jwtAlgorithm: HS256
   jwtSecret: TestJwtSecret
-  ocrUrl: http://ocr-analyzer-service:27017
+  ocrUrl: http://ocr-analyzer-service:9000
 
 ocrAnalyzer:
   logLevel: INFO
-  gpuEnabled: "false"
-  ocrLanguages: "hu,en"
+  gpuEnabled: false
+  ocrLanguages: hu,en

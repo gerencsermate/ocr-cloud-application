@@ -8,7 +8,7 @@ from app.model.db.user import User
 class File(Document):
     filename: Indexed(str, unique=True)
     description: str
-    ocr_text: Optional[list] = None
+    ocr_text: Optional[str] = None
 
     uploader: Link[User]
 

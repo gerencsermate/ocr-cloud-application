@@ -41,7 +41,10 @@ class FileService:
 
         try:
             ocr_data = await self._trigger_ocr_process(new_filename)
-            file.ocr_text = ocr_data.found_texts.join(", ")
+            if ocr_data.found_texts:
+                file.ocr_text = ", ".join(ocr_data.found_texts)
+            else:
+                file.ocr_text = ""
         except Exception as e:
             logger.error("OCR process failed: %s", str(e))
             raise e
@@ -56,7 +59,7 @@ class FileService:
         async with httpx.AsyncClient() as client:
             response = await client.post(
                 f"{self.conf.OCR_URL}/ocr-process",
-                json=ocr_request.model_dump_json(),
+                json=ocr_request.model_dump(),
                 timeout=30.0,
             )
 

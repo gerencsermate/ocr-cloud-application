@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: notification-sender
-          image: gerencsermate/notification-sender:{{ .Values.env.FILE_UPLOADER_IMAGE_VERSION }}
+          image: gerencsermate/notification-sender:{{ .Values.env.NOTIFICATION_SENDER_IMAGE_VERSION }}
           ports:
             - name: http
               containerPort: 9000

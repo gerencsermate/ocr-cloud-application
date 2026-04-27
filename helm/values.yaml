@@ -15,5 +15,5 @@ fileUploader:
 
 ocrAnalyzer:
   logLevel: INFO
-  gpuEnabled: false
+  gpuEnabled: "false"
   ocrLanguages: "hu,en"

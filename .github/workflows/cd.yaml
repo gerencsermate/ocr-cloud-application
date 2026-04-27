@@ -34,17 +34,17 @@ jobs:
             file-uploader: 
               - 'file-uploader/**'
               - 'helm/templates/file-uploader/**'
-              - 'helm/*'
+              - 'helm/**'
               - '.github/**'
             notification-sender: 
               - 'notification-sender/**'
               - 'helm/templates/notification-sender/**'
-              - 'helm/*'
+              - 'helm/**'
               - '.github/**'
             ocr-analyzer: 
               - 'ocr-analyzer/**'
               - 'helm/templates/ocr-analyzer/**'
-              - 'helm/*'
+              - 'helm/**'
               - '.github/**'
 
   lint:

@@ -145,7 +145,7 @@ jobs:
           SERVICES='${{ needs.changes.outputs.services }}'
 
           for service in $(echo $SERVICES | jq -r '.[]'); do
-            SERVICE_NAME_UPPER=$(echo "${{ matrix.service }}" | tr '[:lower:]' '[:upper:]' | tr '-' '_')
+            SERVICE_NAME_UPPER=$(echo "$service" | tr '[:lower:]' '[:upper:]' | tr '-' '_')
             VAR_NAME="${SERVICE_NAME_UPPER}_IMAGE_VERSION"
             sed -i 's|$VAR_NAME:.*|$VAR_NAME: '${{ github.sha }}'|' values.yaml
             
